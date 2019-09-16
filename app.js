@@ -13,9 +13,9 @@ let darksky_api_url = 'https://api.darksky.net/forecast/'+ darksky_key +'/37.826
 
 
 // temp req function
-request({darksky_api_url, json: true}, (error, response) =>{ 
+request({url:darksky_api_url, json: true}, (error, response) => { 
         
-    //let currently = response.currently
-    console.log(response.body)
-    //console.log(response.body.daily.data[0].summary + " It is currently " + currently.temperature + ' degrees out. There is a ' + currently.precipProbability + '% chance of rain.')
+    let currently = response.body.currently
+    let daily = response.body.daily
+    console.log(daily.data[0].summary + " It is currently " + currently.temperature + ' degrees out. There is a ' + currently.precipProbability + '% chance of rain.')
 })
