@@ -12,13 +12,14 @@ let darksky_api_loader = (lat_and_long, callback) => {
 
     request({url:darksky_api_url, json: true}, (error, response) => { 
         if (error) {
-            console.log(chalk.red('Unable to connect to weather service'))
+            callback('Unable to connect to weather service', undefined, undefined)
         } else if (response.body.error) { 
-            console.log(chalk.red('Unable to show location'))
+            callback('Unable to show location', undefined, undefined)
         } else {
-            let body = response.body
+            let daily = response.body.daily
+            let currently = response.body.currently
 
-            callback(body)
+            callback(undefined, daily, currently)
         }
     })
     

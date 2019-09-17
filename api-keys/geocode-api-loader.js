@@ -14,15 +14,15 @@ let geocode_api_loader = (cityName, callback) => {
 
     request({url:geocode_url, json: true}, (error, response) => { 
         if (error){
-            console.log(chalk.red('Unable to connect to location services'))
+            callback('Unable to connect to location services!', undefined)
         } else if (response.body.status === 'ZERO_RESULTS') {
-            console.log(chalk.red('Location not valid'))
+            callback('Location not valid', undefined)
         } else {
             let coordinates = response.body.results[0].geometry.location
             let lat = coordinates.lat.toFixed(4)
             let long = coordinates.lng.toFixed(4)
             let lat_and_long = '/' + lat + ',' + long
-            callback(lat_and_long)
+            callback(undefined, lat_and_long)
         }
         
     })
